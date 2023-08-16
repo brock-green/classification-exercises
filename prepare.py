@@ -1,3 +1,5 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
 def prep_iris(df):
     '''
     This function will drop any duplicate observations, 
@@ -19,6 +21,7 @@ def prep_titanic(df_titanic):
     '''
     df_titanic = df_titanic.drop_duplicates()
     df_titanic = df_titanic.drop(columns=['deck', 'embarked', 'class', 'age'])
+    df_titanic['embark_town'] = df_titanic['embark_town'].fillna(value='Southampton')
     dummy_df = pd.get_dummies(df_titanic[['sex', 'embark_town']], drop_first=True, dtype=int)
     df_titanic = pd.concat([df_titanic, dummy_df], axis=1)
     return df_titanic
