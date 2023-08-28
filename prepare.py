@@ -23,7 +23,6 @@ def prep_titanic(df_titanic):
     df_titanic = df_titanic.drop(columns=['deck', 'embarked', 'class', 'age'])
     df_titanic['embark_town'] = df_titanic['embark_town'].fillna(value='Southampton')
     dummy_df = pd.get_dummies(df_titanic[['sex', 'embark_town']], drop_first=True, dtype=int)
-    df_titanic = df_titanic.drop(columns=['sex', 'embark_town'])
     df_titanic = pd.concat([df_titanic, dummy_df], axis=1)
     return df_titanic
 
@@ -62,12 +61,12 @@ def prep_telco(df_telco):
 
 def split_function(df, target_varible):
     train, test = train_test_split(df,
-                                   random_state=123,
+                                   random_state=666,
                                    test_size=.20,
                                    stratify= df[target_varible])
     
     train, validate = train_test_split(train,
-                                   random_state=123,
+                                   random_state=666,
                                    test_size=.25,
                                    stratify= train[target_varible])
     return train, validate, test
